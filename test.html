@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streaming Example</title>
+    <script>
+        async function startStream() {
+            const name = document.getElementById('nameInput').value;
+            const response = await fetch(`http://localhost:8080/api/v1/gpt?name=${name}`);
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder("utf-8");
+            const messageList = document.getElementById('messages');
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                const text = decoder.decode(value);
+                const message = JSON.parse(text).message;
+                const beforeMessage = messageList.innerText + message
+                messageList.innerText = beforeMessage;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Streaming Example</h1>
+    <input type="text" id="nameInput" placeholder="Enter name" />
+    <button onclick="startStream()">Start Stream</button>
+    <div id="messages"></div>
+</body>
+</html>

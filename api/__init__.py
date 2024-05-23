@@ -9,6 +9,7 @@ from werkzeug.utils import import_string
 from api.common import jwt
 from api.server_status import server_status_api
 from api.tts import tts_api
+from api.gpt import gpt_api
 from config import config_by_name
 from util.logging_util import logger
 
@@ -65,9 +66,11 @@ def create_app():
     # register namespace
     api.add_namespace(tts_api)
     api.add_namespace(server_status_api)
+    api.add_namespace(gpt_api)
     # register controllers
     from api.tts import controllers
     from api.server_status import controllers
+    from api.gpt import controllers
 
     # enable CORS for front-end app
     CORS(app)

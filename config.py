@@ -9,15 +9,6 @@ class JWTConfig(SingletonInstance):
 
         self.SECRET_KEY = "thisissecretkeyletmeintroducemyselfforyou"
 
-
-# SQL Alchemy
-# class SQLAlchemyConfig(SingletonInstance):
-#     def __init__(self):
-#         self.DB_HOST = get_config_from_param_store(f'/52g/template-flask/dev/db-host')
-#         self.DB_USERNAME = get_config_from_param_store(f'/52g/template-flask/dev/db-username')
-#         self.DB_PASSWORD = get_config_from_param_store(f'/52g/template-flask/dev/db-password')
-
-
 # Flask Base Configuration
 class BaseConfig(object):
     # Flask
@@ -41,23 +32,10 @@ class BaseConfig(object):
 class LocalConfig(BaseConfig):
     DEBUG = True
 
-    # PostgreSQL
-    # @property
-    # def SQLALCHEMY_DATABASE_URI(self):
-    #     return f'postgresql://52g-dev:test123@localhost:5432/template-flask'
-
 
 # Flask Dev Configuration
 class DevConfig(BaseConfig):
-    BASE_URL = "https://template.52g.studio"
-
-    # PostgreSQL
-    # @property
-    # def SQLALCHEMY_DATABASE_URI(self):
-    #     db_host = SQLAlchemyConfig.instance().DB_HOST
-    #     db_username = SQLAlchemyConfig.instance().DB_USERNAME
-    #     db_password = SQLAlchemyConfig.instance().DB_PASSWORD
-    #     return f'postgresql://{db_username}:{db_password}@{db_host}:5432/template-flask'
+    BASE_URL = "https://localhost"
 
 
 config_by_name = dict(local="config.LocalConfig", dev="config.DevConfig")
