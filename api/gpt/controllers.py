@@ -22,9 +22,12 @@ class TTS(Resource):
 
 # 스트리밍 함수
 def generate_stream_response(content: str):
+    mbti = 'INFP';
     stream = ollama.chat(
         model='ggml',
-        messages=[{'role': 'user', 'content': content}],
+        messages= [{'role': 'user', 'content': f'너는 mbti의 {mbti} 성격을 가진 20대 여자인것 처럼 연기해줘'},
+                  {'role': 'assistant', 'content': '웅 알겠어'},
+                  {'role': 'user', 'content': content}],
         stream=True,
     )
 
