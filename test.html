@@ -6,8 +6,9 @@
     <title>Streaming Example</title>
     <script>
         async function startStream() {
-            const name = document.getElementById('nameInput').value;
-            const response = await fetch(`http://localhost:8080/api/v1/gpt?name=${name}`);
+            const content = document.getElementById('contentInput').value;
+            const mbti = 'INFP';
+            const response = await fetch(`http://localhost:8080/api/v1/gpt?mbti=${mbti}&content=${content}`);
             const reader = response.body.getReader();
             const decoder = new TextDecoder("utf-8");
             const messageList = document.getElementById('messages');
@@ -25,7 +26,7 @@
 </head>
 <body>
     <h1>Streaming Example</h1>
-    <input type="text" id="nameInput" placeholder="Enter name" />
+    <input type="text" id="contentInput" placeholder="Enter name" />
     <button onclick="startStream()">Start Stream</button>
     <div id="messages"></div>
 </body>
